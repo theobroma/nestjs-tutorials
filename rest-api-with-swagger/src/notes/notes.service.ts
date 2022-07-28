@@ -1,26 +1,70 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { Note } from './entities/note.entity';
 
 @Injectable()
 export class NotesService {
-  create(createNoteDto: CreateNoteDto) {
-    return 'This action adds a new note';
+  private _notes: Note[] = [];
+
+  create(userId: number, dto: CreateNoteDto) {
+    const id = this._getRandomInt();
+    const note = new Note(id, userId, dto.title, dto.content);
+    this._notes.push(note);
+    return note;
   }
 
-  findAll() {
-    return `This action returns all notes`;
+  findAll(userId: number) {
+    return this._notes.filter((note) => note.userId == userId);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} note`;
+  findOne(noteId: number) {
+    return this._notes.filter((note) => note.id == noteId);
   }
 
-  update(id: number, updateNoteDto: UpdateNoteDto) {
-    return `This action updates a #${id} note`;
+  update(noteId: number, dto: UpdateNoteDto) {
+    const index = this._notes.findIndex((note) => note.id == noteId);
+
+    if (index === -1) {
+      return;
+    }
+
+    const { id, userId } = this._notes[index];
+    this._notes[index] = new Note(id, userId, dto.title, dto.content);
+    return this._notes[index];
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} note`;
+  remove(noteId: number) {
+    this._notes = this._notes.filter((note) => note.id != noteId);
+  }
+
+  private _getRandomInt() {
+    return Math.floor(Math.random() * 100);
   }
 }
+// import { Injectable } from '@nestjs/common';
+// import { CreateNoteDto } from './dto/create-note.dto';
+// import { UpdateNoteDto } from './dto/update-note.dto';
+
+// @Injectable()
+// export class NotesService {
+//   create(createNoteDto: CreateNoteDto) {
+//     return 'This action adds a new note';
+//   }
+
+//   findAll() {
+//     return `This action returns all notes`;
+//   }
+
+//   findOne(id: number) {
+//     return `This action returns a #${id} note`;
+//   }
+
+//   update(id: number, updateNoteDto: UpdateNoteDto) {
+//     return `This action updates a #${id} note`;
+//   }
+
+//   remove(id: number) {
+//     return `This action removes a #${id} note`;
+//   }
+// }
