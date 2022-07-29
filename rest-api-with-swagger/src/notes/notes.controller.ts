@@ -8,10 +8,12 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { NotesService } from './notes.service';
 
+@ApiTags('Notes') // <---- Отдельная секция в Swagger для всех методов контроллера
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
