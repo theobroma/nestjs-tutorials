@@ -6,4 +6,4 @@
 
 - [article](https://habr.com/ru/post/668340/)
 - [heroku deploy](https://medium.com/weekly-webtips/deploying-a-nestjs-app-with-heroku-5fa84cb5b6c6)
-- [heroku demo](https://serene-harbor-81240.herokuapp.com/)
+- [heroku demo](https://serene-harbor-81240.herokuapp.com/api)
