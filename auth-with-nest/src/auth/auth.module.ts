@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from 'src/user/user.module';
-import { AuthService } from './auth.service';
+import { UsersModule } from 'src/users/users.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
-import { UsersService } from 'src/user/user.service';
+import { UsersService } from 'src/users/users.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from '../user/user.model';
+import { UserSchema } from '../users/users.model';
 import { LocalStrategy } from './local-strategy';
+import { AuthService } from './auth.service';
 
 @Module({
   imports: [
-    UserModule,
+    UsersModule,
     PassportModule,
     JwtModule.register({
       secret: 'secretKey',
