@@ -1,3 +1,4 @@
+// https://github.com/feathersjs-ecosystem/feathers-mongoose/issues/389#issuecomment-657542875
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
@@ -7,7 +8,9 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/authentication'),
+    MongooseModule.forRoot(
+      'mongodb://useradmin:thepianohasbeendrinking@localhost/authentication?authSource=admin',
+    ),
     UsersModule,
     AuthModule,
   ],
